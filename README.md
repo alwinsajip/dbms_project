@@ -40,7 +40,28 @@ Each service directory now includes its own `README.md` covering inputs, outputs
 ### Setup
 
 ```bash
-python -m pip install --no-build-isolation -e ".[dev]"
+python -m venv .venv
+```
+
+Activate the virtual environment before installing dependencies:
+
+```bash
+# Windows PowerShell
+.venv\Scripts\Activate.ps1
+
+# Windows cmd
+.venv\Scripts\activate.bat
+
+# macOS / Linux
+source .venv/bin/activate
+```
+
+Then install the project dependencies:
+
+```bash
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python -m pip install --no-build-isolation -e .
 ```
 
 ### Smoke validation
