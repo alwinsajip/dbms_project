@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" font-family="Consolas, monospace" font-size="11">
+  <defs>
+    <style>
+      .domain { fill: #e8f0fe; stroke: #1a73e8; stroke-width: 1.5; rx: 8; ry: 8; }
+      .domain-title { fill: #1a73e8; font-size: 12; font-weight: bold; text-anchor: middle; }
+      .domain-desc { fill: #333; font-size: 10; text-anchor: middle; }
+      .domain-item { fill: #f5f5f5; stroke: #ddd; stroke-width: 1; rx: 4; ry: 4; }
+      .domain-text { fill: #555; font-size: 9; text-anchor: middle; }
+      .arrow { stroke: #1a73e8; stroke-width: 1.5; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#1a73e8"/>
+    </marker>
+  </defs>
+
+  <text x="400" y="25" font-size="14" font-weight="bold" text-anchor="middle">FIG. 5 — Candidate Modification Domains</text>
+  <text x="400" y="42" font-size="10" font-style="italic" text-anchor="middle" fill="#666">Each domain is implemented as an independent strategy module via the CandidateStrategy interface</text>
+
+  <!-- Center: Workload Signature -->
+  <rect x="300" y="60" width="200" height="45" fill="#1a73e8" rx="6"/>
+  <text x="400" y="80" fill="#fff" font-size="12" font-weight="bold" text-anchor="middle">Workload Signature</text>
+  <text x="400" y="95" fill="#ddd" font-size="9" text-anchor="middle">Query shapes · Latency · Resources · Skew</text>
+
+  <!-- 5 domains arranged radially -->
+  <!-- 1. Indexing (top-left) -->
+  <rect x="30" y="140" width="180" height="90" class="domain"/>
+  <text x="120" y="162" class="domain-title">Indexing Scheme</text>
+  <rect x="40" y="172" width="160" height="20" class="domain-item"/>
+  <text x="120" y="185" class="domain-text">CREATE / DROP / MODIFY indexes</text>
+  <rect x="40" y="195" width="160" height="20" class="domain-item"/>
+  <text x="120" y="208" class="domain-text">B-tree · Hash · GIN · BRIN · Covering</text>
+  <path d="M 300,80 L 210,155" class="arrow"/>
+
+  <!-- 2. Storage (top-right) -->
+  <rect x="240" y="140" width="180" height="90" class="domain"/>
+  <text x="330" y="162" class="domain-title">Storage Layout</text>
+  <rect x="250" y="172" width="160" height="20" class="domain-item"/>
+  <text x="330" y="185" class="domain-text">Row / Columnar layout</text>
+  <rect x="250" y="195" width="160" height="20" class="domain-item"/>
+  <text x="330" y="208" class="domain-text">Fill factor · TOAST thresholds</text>
+  <path d="M 330,105 L 330,140" class="arrow"/>
+
+  <!-- 3. Partitioning (bottom-left) -->
+  <rect x="30" y="270" width="180" height="90" class="domain"/>
+  <text x="120" y="292" class="domain-title">Partitioning Strategy</text>
+  <rect x="40" y="302" width="160" height="20" class="domain-item"/>
+  <text x="120" y="315" class="domain-text">Range / Hash / List</text>
+  <rect x="40" y="325" width="160" height="20" class="domain-item"/>
+  <text x="120" y="338" class="domain-text">Skew detection · Re-partition</text>
+  <path d="M 120,230 L 120,270" class="arrow"/>
+
+  <!-- 4. Compression (bottom-center) -->
+  <rect x="240" y="270" width="180" height="90" class="domain"/>
+  <text x="330" y="292" class="domain-title">Compression Method</text>
+  <rect x="250" y="302" width="160" height="20" class="domain-item"/>
+  <text x="330" y="315" class="domain-text">Per-column / Per-partition</text>
+  <rect x="250" y="325" width="160" height="20" class="domain-item"/>
+  <text x="330" y="338" class="domain-text">pglz · Hot vs Cold data</text>
+  <path d="M 330,230 L 330,270" class="arrow"/>
+
+  <!-- 5. Execution Config (bottom-right) -->
+  <rect x="450" y="270" width="180" height="90" class="domain"/>
+  <text x="540" y="292" class="domain-title">Query Execution Config</text>
+  <rect x="460" y="302" width="160" height="20" class="domain-item"/>
+  <text x="540" y="315" class="domain-text">work_mem · parallelism</text>
+  <rect x="460" y="325" width="160" height="20" class="domain-item"/>
+  <text x="540" y="338" class="domain-text">Planner cost constants · MV</text>
+  <path d="M 500,105 L 540,140 L 540,270" class="arrow"/>
+
+  <!-- Center: Candidate Generation Engine -->
+  <rect x="300" y="200" width="200" height="30" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.5" rx="4"/>
+  <text x="400" y="220" font-size="11" font-weight="bold" text-anchor="middle" fill="#2e7d32">Candidate Generation Engine</text>
+
+  <!-- Output arrow -->
+  <rect x="40" y="390" width="720" height="40" fill="#fff3cd" stroke="#ffc107" rx="4"/>
+  <text x="400" y="408" font-size="11" font-weight="bold" text-anchor="middle">Output: Ranked list of Candidate objects (DDL statements + config deltas + predicted impact)</text>
+  <text x="400" y="422" font-size="9" text-anchor="middle" fill="#666">Each candidate carries domain, DDL with rollback SQL, improvement/risk scores, and correlation ID</text>
+
+  <path d="M 300,225 L 210,225 L 120,225 L 120,270" class="arrow"/>
+  <path d="M 500,225 L 540,225 L 540,270" class="arrow"/>
+</svg>

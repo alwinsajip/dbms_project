@@ -1,0 +1,27 @@
+rules:
+  - name: production-blackout-0200-0400
+    enabled: false
+    rule_type: blackout_window
+    config:
+      start: "02:00"
+      end: "04:00"
+
+  - name: block-sensitive-tables
+    enabled: false
+    rule_type: block_table
+    config:
+      tables:
+        - "public.users"
+        - "public.credentials"
+
+  - name: max-risk-threshold
+    enabled: true
+    rule_type: max_risk
+    config:
+      value: 0.8
+
+  - name: min-improvement-threshold
+    enabled: true
+    rule_type: min_improvement
+    config:
+      value: 5.0

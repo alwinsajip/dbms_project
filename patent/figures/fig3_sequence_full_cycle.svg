@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" font-family="Consolas, monospace" font-size="11">
+  <style>
+    .actor { fill: #1a73e8; stroke: #0d47a1; stroke-width: 1.5; rx: 4; ry: 4; }
+    .text-actor { fill: #fff; font-size: 10; text-anchor: middle; font-weight: bold; }
+    .line { stroke: #bbb; stroke-width: 1; stroke-dasharray: 4,3; }
+    .arrow-right { stroke: #1a73e8; stroke-width: 1.5; fill: none; marker-end: url(#arrow-blue); }
+    .arrow-left { stroke: #e8451c; stroke-width: 1.5; fill: none; marker-end: url(#arrow-red); }
+    .note { fill: #fff3cd; stroke: #ffc107; stroke-width: 1; rx: 3; ry: 3; }
+    .text-note { font-size: 9; fill: #856404; }
+    .text-label { font-size: 9; fill: #333; }
+    .phase { fill: #e8f0fe; stroke: none; }
+    .phase-label { font-size: 9; fill: #1a73e8; font-weight: bold; }
+  </style>
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#1a73e8"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#e8451c"/>
+    </marker>
+  </defs>
+
+  <text x="450" y="25" font-size="14" font-weight="bold" text-anchor="middle">FIG. 3 — End-to-End Autonomous Reconfiguration Cycle</text>
+
+  <!-- Actors -->
+  <rect x="30" y="45" width="90" height="28" class="actor"/>
+  <text x="75" y="63" class="text-actor">TWM</text>
+  <rect x="160" y="45" width="90" height="28" class="actor"/>
+  <text x="205" y="63" class="text-actor">CGE</text>
+  <rect x="290" y="45" width="90" height="28" class="actor"/>
+  <text x="335" y="63" class="text-actor">DTO</text>
+  <rect x="420" y="45" width="90" height="28" class="actor"/>
+  <text x="465" y="63" class="text-actor">VCE</text>
+  <rect x="550" y="45" width="90" height="28" class="actor"/>
+  <text x="595" y="63" class="text-actor">DO</text>
+  <rect x="680" y="45" width="90" height="28" class="actor"/>
+  <text x="725" y="63" class="text-actor">RRC</text>
+
+  <!-- Lifelines -->
+  <line x1="75" y1="73" x2="75" y2="620" class="line"/>
+  <line x1="205" y1="73" x2="205" y2="620" class="line"/>
+  <line x1="335" y1="73" x2="335" y2="620" class="line"/>
+  <line x1="465" y1="73" x2="465" y2="620" class="line"/>
+  <line x1="595" y1="73" x2="595" y2="620" class="line"/>
+  <line x1="725" y1="73" x2="725" y2="620" class="line"/>
+
+  <!-- Phase 1: Monitor -->
+  <rect x="30" y="85" width="760" height="60" class="phase" opacity="0.3"/>
+  <text x="40" y="98" class="phase-label">Phase 1 — Monitor</text>
+  <rect x="35" y="105" width="80" height="30" class="note"/>
+  <text x="75" y="123" class="text-note">Poll PG stats + psutil</text>
+  <path d="M 75,140 L 205,140" class="arrow-right"/>
+  <text x="140" y="155" class="text-label" font-size="8">workload.update / workload.anomaly</text>
+
+  <!-- Phase 2: Generate -->
+  <rect x="30" y="170" width="760" height="80" class="phase" opacity="0.3"/>
+  <text x="40" y="183" class="phase-label">Phase 2 — Generate Candidates</text>
+  <rect x="165" y="190" width="80" height="40" class="note"/>
+  <text x="205" y="204" class="text-note">Run 5 strategies</text>
+  <text x="205" y="216" class="text-note">Score + rank</text>
+  <path d="M 205,235 L 465,235" class="arrow-right"/>
+  <text x="335" y="250" class="text-label" font-size="8">candidate.proposed</text>
+
+  <!-- Phase 3: Validate -->
+  <rect x="30" y="270" width="760" height="100" class="phase" opacity="0.3"/>
+  <text x="40" y="283" class="phase-label">Phase 3 — Digital Twin Validation</text>
+  <path d="M 465,295 L 335,295" class="arrow-left"/>
+  <text x="400" y="290" class="text-label" font-size="8">provision twin</text>
+  <rect x="295" y="305" width="80" height="25" class="note"/>
+  <text x="335" y="318" class="text-note">pg_basebackup</text>
+  <text x="335" y="328" class="text-note">apply DDL</text>
+  <path d="M 335,335 L 465,335" class="arrow-right"/>
+  <text x="400" y="350" class="text-label" font-size="8">twin ready</text>
+  <rect x="425" y="355" width="80" height="40" class="note"/>
+  <text x="465" y="369" class="text-note">Check correctness</text>
+  <text x="465" y="381" class="text-note">Check performance</text>
+
+  <!-- Phase 4: Deploy -->
+  <rect x="30" y="400" width="760" height="80" class="phase" opacity="0.3"/>
+  <text x="40" y="413" class="phase-label">Phase 4 — Controlled Deployment</text>
+  <path d="M 465,425 L 595,425" class="arrow-right"/>
+  <text x="530" y="420" class="text-label" font-size="8">validation.complete</text>
+  <rect x="555" y="435" width="80" height="30" class="note"/>
+  <text x="595" y="449" class="text-note">Blue/green cutover</text>
+  <text x="595" y="461" class="text-note">Health check</text>
+  <path d="M 595,470 L 725,470" class="arrow-right"/>
+  <text x="660" y="485" class="text-label" font-size="8">deployment.completed</text>
+
+  <!-- Phase 5: Monitor -->
+  <rect x="30" y="500" width="760" height="80" class="phase" opacity="0.3"/>
+  <text x="40" y="513" class="phase-label">Phase 5 — Post-Deployment Monitoring (with optional rollback)</text>
+  <path d="M 75,525 L 725,525" class="arrow-left"/>
+  <text x="400" y="520" class="text-label" font-size="8">workload.update (live telemetry)</text>
+  <rect x="685" y="540" width="80" height="30" class="note"/>
+  <text x="725" y="554" class="text-note">Check regression</text>
+  <text x="725" y="566" class="text-note">vs baseline</text>
+  <path d="M 725,575 L 595,575" class="arrow-left" stroke="#e8451c"/>
+  <text x="660" y="590" class="text-label" font-size="8" fill="#e8451c">rollback.triggered (if regression detected)</text>
+
+  <text x="450" y="620" font-size="10" font-style="italic" text-anchor="middle">All messages carry correlation IDs for end-to-end audit trail reconstruction</text>
+</svg>

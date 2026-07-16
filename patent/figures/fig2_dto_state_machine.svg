@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 500" font-family="Consolas, monospace" font-size="12">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#333"/>
+    </marker>
+    <style>
+      .state { fill: #e8f0fe; stroke: #1a73e8; stroke-width: 2; }
+      .state-final { fill: #e8f5e9; stroke: #2e7d32; stroke-width: 2; }
+      .arrow { stroke: #555; stroke-width: 1.5; fill: none; marker-end: url(#arrow); }
+      .label { font-size: 11; text-anchor: middle; fill: #333; }
+      .sub { font-size: 9; text-anchor: middle; fill: #666; }
+    </style>
+  </defs>
+
+  <text x="350" y="30" font-size="16" font-weight="bold" text-anchor="middle">FIG. 2 — Digital Twin Orchestrator State Machine</text>
+
+  <!-- IDLE -->
+  <ellipse cx="350" cy="80" rx="50" ry="25" class="state-final"/>
+  <text x="350" y="84" class="label" font-weight="bold">IDLE</text>
+
+  <!-- PROVISIONING -->
+  <ellipse cx="350" cy="180" rx="65" ry="25" class="state"/>
+  <text x="350" y="184" class="label" font-weight="bold">PROVISIONING</text>
+
+  <!-- APPLYING -->
+  <ellipse cx="350" cy="280" rx="55" ry="25" class="state"/>
+  <text x="350" y="284" class="label" font-weight="bold">APPLYING</text>
+
+  <!-- REPLAYING -->
+  <ellipse cx="200" cy="380" rx="55" ry="25" class="state"/>
+  <text x="200" y="384" class="label" font-weight="bold">REPLAYING</text>
+
+  <!-- EVALUATING -->
+  <ellipse cx="500" cy="380" rx="55" ry="25" class="state"/>
+  <text x="500" y="384" class="label" font-weight="bold">EVALUATING</text>
+
+  <!-- DESTROYING -->
+  <ellipse cx="350" cy="460" rx="55" ry="25" class="state" stroke="#c62828"/>
+  <text x="350" y="464" class="label" font-weight="bold" fill="#c62828">DESTROYING</text>
+
+  <!-- Transitions -->
+  <path d="M 350,105 L 350,155" class="arrow"/>
+  <text x="360" y="135" class="sub">start</text>
+
+  <path d="M 350,205 L 350,255" class="arrow"/>
+  <text x="360" y="235" class="sub">candidate received</text>
+
+  <path d="M 350,305 L 260,355" class="arrow"/>
+  <text x="285" y="335" class="sub">traffic sample captured</text>
+
+  <path d="M 240,395 L 440,395" class="arrow"/>
+  <text x="340" y="390" class="sub">replay complete</text>
+
+  <path d="M 500,405 L 410,445" class="arrow"/>
+  <text x="500" y="435" class="sub">evaluation complete</text>
+
+  <path d="M 290,445 L 200,405" class="arrow"/>
+  <text x="230" y="435" class="sub">error/abort</text>
+
+  <path d="M 350,485 L 350,105" class="arrow"/>
+  <text x="340" y="500" class="sub">cleanup done</text>
+
+  <!-- Error transitions -->
+  <path d="M 285,180 L 200,180 L 200,435" class="arrow" stroke="#c62828"/>
+  <text x="220" y="310" class="sub" fill="#c62828">provision error</text>
+
+  <path d="M 295,280 L 200,280 L 200,435" class="arrow" stroke="#c62828"/>
+  <text x="220" y="270" class="sub" fill="#c62828">apply error</text>
+
+  <text x="350" y="520" font-size="10" font-style="italic" text-anchor="middle">All transitions are idempotent and safe for concurrent candidate evaluation</text>
+</svg>
