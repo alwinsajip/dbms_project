@@ -1,7 +1,7 @@
 @echo off
 set PGBIN=C:\Program Files\PostgreSQL\18\bin
-set PGDATA_PROD=J:\Patent\dbms\pgdata\prod
-set PGDATA_TWIN=J:\Patent\dbms\pgdata\twin
+set PGDATA_PROD=C:\Patent\dbms\pgdata\prod
+set PGDATA_TWIN=C:\Patent\dbms\pgdata\twin
 set PROD_PORT=5542
 set TWIN_PORT=5543
 

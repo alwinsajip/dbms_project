@@ -130,9 +130,9 @@ class TwinInstance:
 
 
 class DigitalTwinOrchestrator:
-    def __init__(self, twin_base_dir: str = "J:\\Patent\\dbms\\pgdata\\twins",
+    def __init__(self, twin_base_dir: str = "C:\\Patent\\dbms\\pgdata\\twins",
                  port_range: tuple = (5544, 5554), production_dsn: str = "",
-                 template_data_dir: str = "J:\\Patent\\dbms\\pgdata\\twin",
+                 template_data_dir: str = "C:\\Patent\\dbms\\pgdata\\twin",
                  production_host: str = "localhost", production_port: int = 5542,
                  production_user: str = "postgres", pg_bin: str = r"C:\Program Files\PostgreSQL\18\bin"):
         self.twin_base_dir = Path(twin_base_dir)
